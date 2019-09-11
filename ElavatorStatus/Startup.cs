@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Schindler.ElavatorStatus.Domain.Helper;
 using Schindler.ElavatorStatus.Domain;
+using Schindler.ElavatorStatus.WebService.Extensions;
 
 namespace ElavatorStatus
 {
@@ -60,7 +61,7 @@ namespace ElavatorStatus
                 .AllowAnyHeader());
 
             app.UseAuthentication();
-
+            app.ConfigureExceptionHandler();
             app.UseMvc();
         }
     }
