@@ -6,5 +6,6 @@ namespace Schindler.ElavatorStatus.Domain
 {
     public interface IUserService
     {
+        User Authenticate(string username, string password);
     }
 }

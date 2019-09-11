@@ -54,6 +54,5 @@ namespace Schindler.ElavatorStatus.Domain
 
             return user;
         }
-
     }
 }
