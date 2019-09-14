@@ -69,7 +69,7 @@ namespace Schindler.ElavatorStatus.Domain
             elavatorStatus.IfNotNull();
             if (!_elavtorStatus.ContainsKey(elavatorStatus.Id))
             {
-                throw new Exception();
+                return;
             }
             _elavtorStatus[elavatorStatus.Id].UpdateElavatorStatus(elavatorStatus);
         }

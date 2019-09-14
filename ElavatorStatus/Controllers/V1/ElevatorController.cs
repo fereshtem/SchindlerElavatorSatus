@@ -34,6 +34,7 @@ namespace Schindler.ElavatorStatus.WebService.Controllers.V1
         }
 
         [HttpGet("ElavatoStatus/{id}")]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult<ElavatorStatusModel> Get(Guid id)
         {
             var item = _elavatoStatusRepository.GetElavatorStatus(id);
@@ -46,6 +47,7 @@ namespace Schindler.ElavatorStatus.WebService.Controllers.V1
         }
 
         [HttpGet("ElavatoStatus")]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult<IEnumerable<ElavatorStatusModel>> Get()
         {
             var items = _elavatoStatusRepository.GetStatuses();
@@ -54,6 +56,7 @@ namespace Schindler.ElavatorStatus.WebService.Controllers.V1
         }
 
         [HttpPut("ElavatoStatus")]
+        [Authorize(Roles = Role.Admin)]
         public ActionResult UpdateProductQuantity(ElavatorStatusModel value)
         {
             _elavatoStatusRepository.UpdateElavatorStatus(_mapper.Map<Schindler.ElavatorStatus.Domain.ElavatorStatus>(value));
@@ -61,7 +64,8 @@ namespace Schindler.ElavatorStatus.WebService.Controllers.V1
             return Ok();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Remove/{id}")]
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Remove(Guid id)
         {
             var existingItem = _elavatoStatusRepository.GetElavatorStatus(id);
