@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Schindler.ElavatorStatus.Domain;
 using Schindler.ElavatorStatus.Domain.Extensions;
-
+using Schindler.ElavatorStatus.WebService.Model;
+using AutoMapper;
 
 namespace Schindler.ElavatorStatus.WebService.Controllers.V1
 {
@@ -17,10 +18,11 @@ namespace Schindler.ElavatorStatus.WebService.Controllers.V1
     public class ElevatorController : ControllerBase
     {
         private readonly IElavatoStatusRepository _elavatoStatusRepository;
-
-        public ElevatorController(IElavatoStatusRepository elavatoStatusRepository)
+        private readonly IMapper _mapper;
+        public ElevatorController(IElavatoStatusRepository elavatoStatusRepository, IMapper mapper)
         {
             _elavatoStatusRepository = elavatoStatusRepository.IfNotNull();
+            _mapper = mapper;
         }
 
         [HttpPost("AddElavatorStatus")]
@@ -28,31 +30,33 @@ namespace Schindler.ElavatorStatus.WebService.Controllers.V1
         public ActionResult Post(Schindler.ElavatorStatus.Domain.ElavatorStatus value)
         {
             _elavatoStatusRepository.InsertStatus(value);
-            return CreatedAtAction("Get", new { id = value.Id }, value);
+            return CreatedAtAction("Get", new { id = value.Id }, _mapper.Map<ElavatorStatusModel>(value));
         }
 
         [HttpGet("ElavatoStatus/{id}")]
-        public ActionResult<Schindler.ElavatorStatus.Domain.ElavatorStatus> Get(Guid id)
+        public ActionResult<ElavatorStatusModel> Get(Guid id)
         {
             var item = _elavatoStatusRepository.GetElavatorStatus(id);
             if (item == null)
             {
                 return NotFound();
             }
-            return Ok(item);
+            return Ok(_mapper.Map<ElavatorStatusModel>(item));
+
         }
 
         [HttpGet("ElavatoStatus")]
-        public ActionResult<IEnumerable<Schindler.ElavatorStatus.Domain.ElavatorStatus>> Get()
+        public ActionResult<IEnumerable<ElavatorStatusModel>> Get()
         {
             var items = _elavatoStatusRepository.GetStatuses();
-            return Ok(items);
+            ICollection<ElavatorStatusModel> icollectionDest = _mapper.Map<List<Schindler.ElavatorStatus.Domain.ElavatorStatus>, ICollection<ElavatorStatusModel>>(items);
+            return Ok(icollectionDest);
         }
 
         [HttpPut("ElavatoStatus")]
-        public ActionResult<Schindler.ElavatorStatus.Domain.ElavatorStatus> UpdateProductQuantity(Schindler.ElavatorStatus.Domain.ElavatorStatus value)
+        public ActionResult UpdateProductQuantity(ElavatorStatusModel value)
         {
-            _elavatoStatusRepository.UpdateElavatorStatus(value);
+            _elavatoStatusRepository.UpdateElavatorStatus(_mapper.Map<Schindler.ElavatorStatus.Domain.ElavatorStatus>(value));
 
             return Ok();
         }

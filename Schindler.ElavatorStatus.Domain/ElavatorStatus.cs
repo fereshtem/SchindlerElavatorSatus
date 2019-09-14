@@ -9,7 +9,7 @@ namespace Schindler.ElavatorStatus.Domain
         {
             Id = Guid.NewGuid();
             Status = status.IfNotNullOrEmpty(); ;
-            Date = DateTime.Now;
+            Date = DateTime.UtcNow;
         }
         public Guid Id { get; set; }
         public string Status { get; set; }
@@ -21,7 +21,7 @@ namespace Schindler.ElavatorStatus.Domain
             if (String.Compare(Status, elavatorStatus.Status) != 0)
             {
                 Status = elavatorStatus.Status;
-                Date = DateTime.Now;
+                Date = DateTime.UtcNow;
             }
         }
     }

@@ -14,6 +14,8 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using AutoMapper;
+using Newtonsoft.Json.Serialization;
 
 namespace Schindler.ElavatorStatus.WebService
 {
@@ -30,7 +32,16 @@ namespace Schindler.ElavatorStatus.WebService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
