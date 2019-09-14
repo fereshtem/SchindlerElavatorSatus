@@ -9,8 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Schindler.ElavatorStatus.Domain.Helper;
 using Schindler.ElavatorStatus.Domain;
 using Schindler.ElavatorStatus.WebService.Extensions;
+using Microsoft.EntityFrameworkCore;
+using System;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
-namespace ElavatorStatus
+namespace Schindler.ElavatorStatus.WebService
 {
     public class Startup
     {
@@ -37,19 +42,36 @@ namespace ElavatorStatus
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
-            services.AddScoped<IUserService, UserService>();
+           .AddJwtBearer(x =>
+           {
+               x.RequireHttpsMetadata = false;
+               x.SaveToken = true;
+               x.Events = new JwtBearerEvents()
+               {
+                   OnAuthenticationFailed = c =>
+                   {
+                       c.NoResult();
+                       c.Response.StatusCode = 500;
+                       c.Response.ContentType = "text/plain";
+                       c.Response.WriteAsync("Unathorized request").Wait();
+                       return Task.CompletedTask;
+                   },
+                   OnChallenge = c =>
+                   {
+                       c.HandleResponse();
+                       return Task.CompletedTask;
+                   }
+               };
+               x.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuerSigningKey = true,
+                   IssuerSigningKey = new SymmetricSecurityKey(key),
+                   ValidateIssuer = false,
+                   ValidateAudience = false
+               };
+           });
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IElavatoStatusRepository, ElavatorStatusRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
