@@ -1,17 +1,18 @@
 ﻿using System;
+using Schindler.ElavatorStatus.Domain.Extensions;
 
 namespace Schindler.ElavatorStatus.Domain
 {
     public class ElavatorStatus
     {
-        public ElavatorStatus(StatusType status)
+        public ElavatorStatus(string status)
         {
             Id = Guid.NewGuid();
-            Status = status;
+            Status = status.IfNotNullOrEmpty(); ;
             Date = DateTime.UtcNow;
         }
         public Guid Id { get; set; }
-        public StatusType Status { get; set; }
+        public string Status { get; set; }
         public DateTime Date { get; set; }
     }
 }
