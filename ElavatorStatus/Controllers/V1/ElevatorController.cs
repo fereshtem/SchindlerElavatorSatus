@@ -29,7 +29,6 @@ namespace Schindler.ElavatorStatus.WebService.Controllers.V1
         {
             _elavatoStatusRepository.InsertStatus(value);
             return CreatedAtAction("Get", new { id = value.Id }, value);
-
         }
 
         [HttpGet("ElavatoStatus/{id}")]
@@ -50,5 +49,26 @@ namespace Schindler.ElavatorStatus.WebService.Controllers.V1
             return Ok(items);
         }
 
+        [HttpPut("ElavatoStatus")]
+        public ActionResult<Schindler.ElavatorStatus.Domain.ElavatorStatus> UpdateProductQuantity(Schindler.ElavatorStatus.Domain.ElavatorStatus value)
+        {
+            _elavatoStatusRepository.UpdateElavatorStatus(value);
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Remove(Guid id)
+        {
+            var existingItem = _elavatoStatusRepository.GetElavatorStatus(id);
+
+            if (existingItem == null)
+            {
+                return NotFound();
+            }
+
+            _elavatoStatusRepository.DeleteElavatorStatus(id);
+            return Ok();
+        }
     }
 }
