@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Schindler.ElavatorStatus.Domain
 {
-    public class UserService : IUserService
+    public class UserRepository : IUserRepository
     {
         private List<User> _users = new List<User>
         {
@@ -23,7 +23,7 @@ namespace Schindler.ElavatorStatus.Domain
 
         private readonly AppSettings _appSettings;
 
-        public UserService(IOptions<AppSettings> appSettings)
+        public UserRepository(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
         }
@@ -41,12 +41,13 @@ namespace Schindler.ElavatorStatus.Domain
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, user.Role)
+                    new Claim("userid", user.Id.ToString()),
+                    new Claim("role", user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
 

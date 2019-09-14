@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Schindler.ElavatorStatus.Domain
 {
-    public interface IUserService
+    public interface IUserRepository
     {
         User Authenticate(string username, string password);
     }
