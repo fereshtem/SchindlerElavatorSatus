@@ -7,9 +7,6 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Schindler.ElavatorStatus.Domain.Helper;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
 
 namespace Schindler.ElavatorStatus.Domain
 {

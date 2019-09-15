@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Schindler.ElavatorStatus.Domain;
 
-namespace Schindler.ElavatorStatus.WebService.Controllers
+namespace Schindler.ElavatorStatus.WebService.Controllers.V1
 {
     [ApiController]
     [Route("v1/api/[controller]")]

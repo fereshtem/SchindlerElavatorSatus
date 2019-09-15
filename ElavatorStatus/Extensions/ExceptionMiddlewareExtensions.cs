@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using Schindler.ElavatorStatus.Domain;
 
 namespace Schindler.ElavatorStatus.WebService.Extensions
@@ -24,6 +20,7 @@ namespace Schindler.ElavatorStatus.WebService.Extensions
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature != null)
                     {
+                        // Exception should be logged here...
                         await context.Response.WriteAsync(new ErrorDetails()
                         {
                             StatusCode = context.Response.StatusCode,

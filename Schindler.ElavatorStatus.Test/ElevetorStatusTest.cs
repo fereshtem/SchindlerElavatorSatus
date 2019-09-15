@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
 using FluentAssertions;
-using System.Collections.Generic;
-using System.Text;
 using Schindler.ElavatorStatus.Domain;
 
 namespace Schindler.ElavatorStatus.Test

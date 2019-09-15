@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Schindler.ElavatorStatus.Domain.Extensions;
 
 namespace Schindler.ElavatorStatus.Domain
