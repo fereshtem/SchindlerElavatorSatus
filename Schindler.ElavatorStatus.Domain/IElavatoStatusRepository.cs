@@ -6,7 +6,7 @@ namespace Schindler.ElavatorStatus.Domain
 {
     public interface IElavatoStatusRepository
     {
-        void InsertStatus(ElavatorStatus elavatorStatus);
+        ElavatorStatus InsertStatus(ElavatorStatus elavatorStatus);
         ElavatorStatus GetElavatorStatus(Guid id);
         List<ElavatorStatus> GetStatuses();
         void UpdateElavatorStatus(ElavatorStatus elavatorStatus);

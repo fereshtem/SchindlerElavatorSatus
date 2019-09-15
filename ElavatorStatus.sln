@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schindler.ElavatorStatus.WebService", "ElavatorStatus\Schindler.ElavatorStatus.WebService.csproj", "{B83DC994-F523-44A0-90EE-3745A5716DFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schindler.ElavatorStatus.Domain", "Schindler.ElavatorStatus.Domain\Schindler.ElavatorStatus.Domain.csproj", "{F6D1C777-25FB-4AC5-866A-CD8A0F3BEF70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schindler.ElavatorStatus.Domain", "Schindler.ElavatorStatus.Domain\Schindler.ElavatorStatus.Domain.csproj", "{F6D1C777-25FB-4AC5-866A-CD8A0F3BEF70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schindler.ElavatorStatus.Test", "Schindler.ElavatorStatus.Test\Schindler.ElavatorStatus.Test.csproj", "{F2F5BD5B-B36D-4598-837C-A686F6D344D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F6D1C777-25FB-4AC5-866A-CD8A0F3BEF70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6D1C777-25FB-4AC5-866A-CD8A0F3BEF70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6D1C777-25FB-4AC5-866A-CD8A0F3BEF70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F5BD5B-B36D-4598-837C-A686F6D344D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F5BD5B-B36D-4598-837C-A686F6D344D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F5BD5B-B36D-4598-837C-A686F6D344D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F5BD5B-B36D-4598-837C-A686F6D344D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

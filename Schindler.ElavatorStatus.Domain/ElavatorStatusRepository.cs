@@ -48,7 +48,7 @@ namespace Schindler.ElavatorStatus.Domain
             return elavatorStatuses;
         }
 
-        public void InsertStatus(ElavatorStatus elavatorStatus)
+        public ElavatorStatus InsertStatus(ElavatorStatus elavatorStatus)
         {
             if (!_elavtorStatus.ContainsKey(elavatorStatus.Id))
             {
@@ -62,6 +62,7 @@ namespace Schindler.ElavatorStatus.Domain
                     throw new Exception();
                 }
             }
+            return elavatorStatus;
         }
 
         public void UpdateElavatorStatus(ElavatorStatus elavatorStatus)
