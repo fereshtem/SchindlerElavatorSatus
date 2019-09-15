@@ -3,12 +3,10 @@ using FluentAssertions;
 using System;
 using Moq;
 using Schindler.ElavatorStatus.Domain;
-using ElavatorStatus.Controllers;
 using Schindler.ElavatorStatus.WebService.Controllers.V1;
 using AutoMapper;
-using Schindler.ElavatorStatus.WebService.Model;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+
 
 namespace Schindler.ElavatorStatus.Test
 {
